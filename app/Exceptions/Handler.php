@@ -38,6 +38,7 @@ class Handler extends ExceptionHandler
 
     /**
      * Render an exception into an HTTP response.
+     * In case the application founds any exception, then redirects to the root page
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception  $e
@@ -45,6 +46,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+       if($e instanceof Exception){
+            return redirect('/');
+        }
         return parent::render($request, $e);
     }
 }
