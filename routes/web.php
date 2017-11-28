@@ -14,10 +14,8 @@
 //Public URLs
 $router->group(['prefix' => 'github/v1'], function($router)
 {
-
-  $router->get('search/{type}/{query}[/{page}[/{perPage}]]','SearchController@search');
-  $router->get('repo/{owner}/{name}','SearchController@view');
-  $router->get('user/{username}','SearchController@view');
+  //Route for the required queries. Query param can contain slashes
+  $router->get('{query?}','SearchController@query');
 
 });
 

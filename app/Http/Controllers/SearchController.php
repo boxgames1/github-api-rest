@@ -8,18 +8,28 @@ use App\Http\Components\CurlComponent;
 class SearchController extends Controller{
 
   public function __construct(Request $request){
+    //We get the base url based on the first url parameter (github, bitbucket, etc..)
     $this->base_url = config($request->segment(1).'_base_url');
     $this->curl = new CurlComponent();
   }
 
-	public function search(Request $request, $type="", $query="", $page=1, $perPage=25){
-    if($type=="" || $query==""){
+	public function query(Request $request, $query=""){
+    if($query==""){
       return "";
     }
+
+    $url=$this->base_url.$query;
+
+    //If the query doesn't specify the items per page then we establish 25 by default
+    if(strpos($query, 'per_page=')==FALSE){
+      $url.="&per_page=25";
+    }
+
     $response=$this->curl->execute(
-        $this->base_url."search/$type?$query&per_page=$perPage&page=$page",
+        $url,
         "GET"
      );
+
     return response()->json(
       $response,
       200,
@@ -28,36 +38,6 @@ class SearchController extends Controller{
     );
 	}
 
-  public function viewRepo(Request $request, $owner="", $name=""){
-      if($owner=="" || $name==""){
-        return "";
-      }
-      $repo=$this->curl->execute(
-        $this->base_url."repos/$owner/$name",
-        "GET"
-      );
-      return response()->json(
-        $repo,
-        200,
-        [],
-        JSON_UNESCAPED_SLASHES
-      );
-  }
 
-  public function viewUser(Request $request, $userName=""){
-      if($userName==""){
-        return "";
-      }
-      $repo=$this->curl->execute(
-        $this->base_url."users/$userName",
-        "GET"
-      );
-      return response()->json(
-        $repo,
-        200,
-        [],
-        JSON_UNESCAPED_SLASHES
-      );
-  }
 }
 ?>
