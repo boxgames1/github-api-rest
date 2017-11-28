@@ -6,7 +6,7 @@
 	<h4>Base URL: https://github-api-rest.herokuapp.com/</h4>
 	<h4>Prefix: /{Provider}/{version}/ - Example /github/v1/</h4>
 	<h4>Method: GET</h4>
-	<h4>Return: JSON with fields of the required entity</h4>
+	<h4>Return: JSON</h4>
 	<ul>
     <li>/{query} : <br />
       Executes the query

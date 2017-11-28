@@ -46,9 +46,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-       /*if($e instanceof ){
-            return json_encode($e);//redirect('/');
-        }*/
+       if($e instanceof Exception){
+            return redirect('/');
+        }
         return parent::render($request, $e);
     }
 }
