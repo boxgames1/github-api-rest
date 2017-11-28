@@ -15,10 +15,15 @@
 $router->group(['prefix' => 'github/v1'], function($router)
 {
   //Route for the required queries. Query param can contain slashes
-  $router->get('{query?}','SearchController@query');
+  $router
+    ->get('/{query:[\s\S]*}','SearchController@query');
 
 });
 
-$router->get('/', function () {
-  return response(view('docu'), 200);
-});
+//On the root url, render the doc view
+$router
+  ->get('/',
+    function () {
+      return response(view('docu'), 200);
+    }
+  );

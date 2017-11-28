@@ -6,7 +6,7 @@
 
 #### Method: GET
 
-#### Return: JSON with fields of the required entity
+#### Return: JSON
 
 *   /{query} :  
     Executes the query The first page and '25' per page are the default values if not specified others in the query.  
