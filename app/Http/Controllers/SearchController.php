@@ -34,7 +34,7 @@ class SearchController extends Controller{
       $response,
       200,
       [],
-      JSON_UNESCAPED_SLASHES
+      JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT
     );
 	}
 
